@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Readiness Report - AI Career Guide</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-custom sticky-top">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <i class="bi bi-cpu text-primary glow-text-indigo"></i>
+        <span>AI Career Guide</span>
+      </a>
+      <a href="/" class="btn btn-premium btn-premium-secondary py-2 px-3 small">
+        <i class="bi bi-house"></i> Dashboard
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container mt-5 py-4 animate-fade-in" style="max-width: 900px;">
+    <div class="card glass-card p-4 p-md-5">
+
+      <div class="text-center mb-5">
+        <div class="fs-1 text-primary mb-2">
+          <i class="bi bi-clipboard-data-fill glow-text-indigo"></i>
+        </div>
+        <h2 class="fw-bold mb-1 text-gradient">✅ Final Skill Readiness Audit</h2>
+        <h4 class="text-muted mt-2">Role Profile: <span class="text-main">{{ role }}</span></h4>
+      </div>
+
+      <!-- Score Dashboard Graph -->
+      <div class="mb-5 p-4 rounded-4"
+        style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-color);">
+
+        <div class="row align-items-center mb-3">
+          <div class="col-sm-6">
+            <h5 class="fw-semibold text-main mb-1">Overall placement Index</h5>
+            <p class="text-muted small mb-0">Compiled from CV contents & checked qualifications</p>
+          </div>
+          <div class="col-sm-6 text-sm-end mt-2 mt-sm-0">
+            {% if level == "Beginner" %}
+            <span class="badge-custom badge-danger-custom fs-6"><i class="bi bi-shield-slash"></i> {{ level }}</span>
+            {% elif level == "Intermediate" %}
+            <span class="badge-custom badge-amber-custom fs-6"><i class="bi bi-shield-half"></i> {{ level }}</span>
+            {% else %}
+            <span class="badge-custom badge-success-custom fs-6"><i class="bi bi-shield-fill-check"></i> {{ level
+              }}</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="progress-container-custom">
+          {% if level == "Beginner" %}
+          <div class="progress-bar-custom progress-bar-rose" style="width: {{ final_score }}%">
+            <span class="progress-bar-text">{{ final_score }}%</span>
+          </div>
+          {% elif level == "Intermediate" %}
+          <div class="progress-bar-custom progress-bar-amber" style="width: {{ final_score }}%">
+            <span class="progress-bar-text">{{ final_score }}%</span>
+          </div>
+          {% else %}
+          <div class="progress-bar-custom progress-bar-emerald" style="width: {{ final_score }}%">
+            <span class="progress-bar-text">{{ final_score }}%</span>
+          </div>
+          {% endif %}
+        </div>
+
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color)">
+
+      <!-- Skill Lists Column Comparison -->
+      <div class="row g-4 mb-4">
+
+        <!-- Audited Strengths -->
+        <div class="col-md-6">
+          <h5 class="fw-semibold text-success mb-3 d-flex align-items-center gap-2">
+            <i class="bi bi-check2-circle"></i>
+            <span>Verified Strengths ({{ known|length }})</span>
+          </h5>
+
+          <ul class="list-group">
+            {% if known %}
+            {% for k in known %}
+            <li class="list-group-item bg-transparent text-main border-0 py-2 px-1 d-flex align-items-center gap-3">
+              <i class="bi bi-check-circle-fill text-success fs-5"></i>
+              <span class="text-capitalize">{{ k }}</span>
+            </li>
+            {% endfor %}
+            {% else %}
+            <li class="list-group-item bg-transparent text-muted border-0 py-2 px-1 small">
+              No self-assessed strengths selected.
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <!-- Skills to Develop -->
+        <div class="col-md-6">
+          <h5 class="fw-semibold text-danger mb-3 d-flex align-items-center gap-2">
+            <i class="bi bi-pencil-square"></i>
+            <span>Skills to target ({{ missing|length }})</span>
+          </h5>
+
+          <ul class="list-group">
+            {% if missing %}
+            {% for m in missing %}
+            <li class="list-group-item bg-transparent text-main border-0 py-2 px-1 d-flex align-items-center gap-3">
+              <i class="bi bi-x-circle-fill text-danger fs-5"></i>
+              <span class="text-capitalize">{{ m }}</span>
+            </li>
+            {% endfor %}
+            {% else %}
+            <li class="list-group-item bg-transparent text-success border-0 py-2 px-1 small fw-semibold">
+              <i class="bi bi-patch-check-fill text-emerald fs-5"></i>
+              <span>You meet all assessed requirements!</span>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+
+      </div>
+
+      <hr class="my-5" style="border-color: rgba(255,255,255,0.1)">
+
+      <!-- Suggestions Description text block -->
+      <div class="mb-4">
+        {% if level == "Beginner" %}
+        <div class="alert alert-danger bg-opacity-10 bg-danger border-danger-subtle p-3 rounded-3"
+          style="border: 1px solid rgba(244,63,94,0.15)">
+          <h6 class="fw-bold mb-1"><i class="bi bi-info-circle-fill text-danger"></i> Recommended Next Steps</h6>
+          <p class="mb-0 small text-muted">A significant number of expected skills are missing. Focus on mastering the
+            key fundamentals of {{ role }} to raise your readiness index.</p>
+        </div>
+        {% elif level == "Intermediate" %}
+        <div class="alert alert-warning bg-opacity-10 bg-warning border-warning-subtle p-3 rounded-3"
+          style="border: 1px solid rgba(245,158,11,0.15)">
+          <h6 class="fw-bold mb-1"><i class="bi bi-info-circle-fill text-warning"></i> Recommended Next Steps</h6>
+          <p class="mb-0 small text-muted">You have a strong base of capabilities. Build practical portfolio
+            deliverables covering your remaining skill target areas to progress.</p>
+        </div>
+        {% else %}
+        <div class="alert alert-success bg-opacity-10 bg-success border-success-subtle p-3 rounded-3"
+          style="border: 1px solid rgba(16,185,129,0.15)">
+          <h6 class="fw-bold mb-1"><i class="bi bi-info-circle-fill text-success"></i> Recommended Next Steps</h6>
+          <p class="mb-0 small text-muted">Excellent job! You are conceptually aligned and ready to pursue mock
+            interview questions and active job applications for {{ role }}.</p>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Action items -->
+      <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+        <a href="/resume" class="btn-premium btn-premium-secondary flex-fill py-3">
+          <i class="bi bi-arrow-repeat"></i> Test Another CV
+        </a>
+        <a href="/" class="btn-premium btn-premium-indigo flex-fill py-3">
+          <i class="bi bi-house"></i> Return to Dashboard
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-custom mt-5">
+    <div class="container text-center">
+      <p class="mb-0 small text-muted">&copy; 2026 AI Career Guide. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

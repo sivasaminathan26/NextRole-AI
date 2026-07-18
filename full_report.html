@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Assessment - AI Career Guide</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-custom sticky-top">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <i class="bi bi-cpu text-primary glow-text-indigo"></i>
+        <span>AI Career Guide</span>
+      </a>
+      <a href="/" class="btn btn-premium btn-premium-secondary py-2 px-3 small">
+        <i class="bi bi-house"></i> Dashboard
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container mt-5 py-4 animate-fade-in" style="max-width: 900px;">
+    <div class="card glass-card p-4 p-md-5">
+
+      <div class="text-center mb-5">
+        <div class="fs-1 text-primary mb-2">
+          <i class="bi bi-bar-chart-line-fill glow-text-indigo"></i>
+        </div>
+        <h2 class="fw-bold mb-1 text-gradient">📊 Complete Skill Readiness Report</h2>
+        <h5 class="text-muted mt-2">Target Job Role: <span class="text-primary">{{ role }}</span></h5>
+      </div>
+
+      <!-- Resume Analysis Score Tracker -->
+      <div class="mb-5 p-4 rounded-4"
+        style="background: rgba(15, 23, 42, 0.02); border: 1px solid var(--border-color);">
+        <h5 class="fw-semibold text-main mb-3 d-flex align-items-center gap-2">
+          <i class="bi bi-file-earmark-check text-cyan"></i>
+          <span>Resume Skill Match</span>
+        </h5>
+        <p class="text-muted small mb-2">Based on keyword matching in your uploaded CV vs expectations.</p>
+
+        <div class="progress-container-custom">
+          <div class="progress-bar-custom progress-bar-cyan" style="width: {{ resume_score }}%">
+            <span class="progress-bar-text">{{ resume_score }}% Match</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" style="border-color: var(--border-color)">
+
+      <!-- Skill Self Assessment Checklist -->
+      <h5 class="fw-semibold text-main mb-3 d-flex align-items-center gap-2">
+        <i class="bi bi-brain text-emerald"></i>
+        <span>Skill Self Assessment</span>
+      </h5>
+      <p class="text-muted small mb-4">Please verify additional skills you possess below to generate the ultimate
+        readiness score evaluation.</p>
+
+      <form action="/final-evaluation" method="post">
+
+        <!-- Hidden Inputs for Form State -->
+        <input type="hidden" name="role" value="{{ role }}">
+        <input type="hidden" name="resume_score" value="{{ resume_score }}">
+
+        <div class="row g-2 mb-4">
+          {% for skill in spec_skills %}
+          <div class="col-md-4 col-sm-6">
+            <label class="checklist-item w-100 mb-0">
+              <input type="checkbox" name="known_skills" value="{{ skill }}">
+              <div class="checklist-label">
+                <span class="custom-checkbox-box">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <span class="text-main fs-6">{{ skill }}</span>
+              </div>
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+
+        <button type="submit" class="btn-premium btn-premium-indigo w-100 py-3 mt-4">
+          <span>Generate final Report</span>
+          <i class="bi bi-patch-check"></i>
+        </button>
+
+      </form>
+
+      <div class="d-flex flex-column flex-sm-row gap-3 mt-3">
+        <a href="/resume" class="btn-premium btn-premium-secondary flex-fill py-3">
+          <i class="bi bi-arrow-left"></i> Re-Upload Resume
+        </a>
+        <a href="/" class="btn-premium btn-premium-secondary flex-fill py-3">
+          <i class="bi bi-house"></i> Home
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-custom mt-5">
+    <div class="container text-center">
+      <p class="mb-0 small text-muted">&copy; 2026 AI Career Guide. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

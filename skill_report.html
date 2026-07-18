@@ -1,0 +1,29 @@
+<h2>📊 Skill Readiness Report</h2>
+
+<h3>Job Role: {{ role }}</h3>
+
+<h4>Skill Match Score: {{ score }}%</h4>
+
+<h4>Status:
+<span style="color:green;">
+{{ level }}
+</span>
+</h4>
+
+<hr>
+
+<h4>📈 Skill Chart</h4>
+
+<div style="width:300px; background:#eee;">
+    
+  <div style="
+    width:{{ score }}%;
+    background:green;
+    color:white;
+    padding:5px;">
+    {{ score }}%
+  </div>
+</div>
+
+<br>
+<a href="/resume">⬅ Back to Resume Analyzer</a>

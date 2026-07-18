@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessment Result - AI Career Guide</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-custom sticky-top">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <i class="bi bi-cpu text-primary glow-text-indigo"></i>
+        <span>AI Career Guide</span>
+      </a>
+      <a href="/" class="btn btn-premium btn-premium-secondary py-2 px-3 small">
+        <i class="bi bi-house"></i> Dashboard
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container mt-5 py-4 animate-fade-in" style="max-width: 900px;">
+    <div class="card glass-card p-4 p-md-5">
+
+      <div class="text-center mb-5">
+        <div class="fs-1 text-emerald mb-2">
+          <i class="bi bi-patch-check-fill glow-text-emerald"></i>
+        </div>
+        <h2 class="fw-bold mb-1">🎯 Suggested Career Path</h2>
+        <h1 class="display-5 fw-800 text-gradient-emerald mt-2 mb-4">{{ result }}</h1>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- Left Side: Roadmap Timeline -->
+        <div class="col-md-6">
+          <h4 class="fw-bold mb-4"><i class="bi bi-signpost-split text-primary"></i> Learning Roadmap</h4>
+
+          <div class="roadmap-list mt-2">
+            {% for step in roadmap %}
+            <div class="roadmap-step">
+              <h6 class="fw-semibold text-main mb-1">{{ step }}</h6>
+              <span class="text-muted small">Phase {{ loop.index }} Development</span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Right Side: Graphic/Visual Representation -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+          {% if roadmap_img %}
+          <div>
+            <h5 class="fw-bold mb-3 text-center text-muted small text-uppercase">Interactive Concept Map</h5>
+            <div class="roadmap-img-container p-2" style="background: rgba(15, 23, 42, 0.02)">
+              <img src="{{ url_for('static', filename=roadmap_img) }}" alt="roadmap trajectory image"
+                class="img-fluid d-block mx-auto" style="max-height: 350px; border-radius: 8px; object-fit: cover;">
+            </div>
+          </div>
+          {% endif %}
+        </div>
+
+      </div>
+
+      {% if companies %}
+      <hr class="my-5" style="border-color: var(--border-color)">
+
+      <!-- Target Opportunities -->
+      <div class="mb-4">
+        <h4 class="fw-bold mb-4"><i class="bi bi-buildings text-cyan"></i> Target Company Profiles</h4>
+
+        <div class="row g-3">
+          {% for type, names in companies.items() %}
+          <div class="col-md-4">
+            <div class="detail-chip h-100 flex-column align-items-start p-3">
+              <strong class="text-gradient-cyan small text-uppercase mb-2">{{ type }}</strong>
+              <div class="d-flex flex-wrap gap-2">
+                {% for n in names %}
+                <span class="badge badge-success-custom">{{ n }}</span>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="d-flex flex-column flex-sm-row gap-3 mt-5">
+        <a href="/quiz" class="btn-premium btn-premium-secondary flex-fill py-3">
+          <i class="bi bi-arrow-repeat"></i> Retake Assessment
+        </a>
+        <a href="/" class="btn-premium btn-premium-indigo flex-fill py-3">
+          <i class="bi bi-house"></i> Return to Dashboard
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-custom mt-5">
+    <div class="container text-center">
+      <p class="mb-0 small text-muted">&copy; 2026 AI Career Guide. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

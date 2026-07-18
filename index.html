@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Career Guide - Smart Dashboard</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-custom sticky-top">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <i class="bi bi-cpu text-primary glow-text-indigo"></i>
+        <span>AI Career Guide</span>
+      </a>
+      <span class="d-none d-sm-inline-block text-muted small">
+        <span class="pulse-indicator pulse-success"></span>AI Analysis Engine Active
+      </span>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="container mt-5 py-4 text-center animate-fade-in">
+    <h1 class="display-4 fw-800 text-gradient mb-3">🚀 Smart Career Assistant</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 600px;">
+      Empower your professional journey using our advanced AI to discover matching career paths and optimize your resume
+      for targeted roles.
+    </p>
+  </div>
+
+  <!-- Cards / Actions Layout -->
+  <div class="container mt-5 animate-fade-in" style="animation-delay: 0.15s;">
+    <div class="row g-4 justify-content-center">
+
+      <!-- Career Quiz Card -->
+      <div class="col-md-5">
+        <div class="card glass-card h-100 p-4 d-flex flex-column justify-content-between">
+          <div>
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="fs-1 text-primary shadow-sm"
+                style="height: 60px; width: 60px; display: flex; align-items: center; justify-content: center; background: rgba(99, 102, 241, 0.1); border-radius: 14px; border: 1px solid rgba(99, 102, 241, 0.2);">
+                <i class="bi bi-compass"></i>
+              </div>
+              <h3 class="fw-bold mb-0">Career Quiz</h3>
+            </div>
+            <p class="text-muted mb-4 fs-6">
+              Not sure which direct software domain fits you best? Answer our interactive quiz based on your personal
+              traits and interests to generate matching roles and structured development roadmaps.
+            </p>
+          </div>
+          <div>
+            <a href="/quiz" class="btn-premium btn-premium-indigo w-100 py-3">
+              <span>Start Assessment</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resume Analyzer Card -->
+      <div class="col-md-5">
+        <div class="card glass-card h-100 p-4 d-flex flex-column justify-content-between">
+          <div>
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="fs-1 text-cyan shadow-sm"
+                style="height: 60px; width: 60px; display: flex; align-items: center; justify-content: center; background: rgba(6, 182, 212, 0.1); border-radius: 14px; border: 1px solid rgba(6, 182, 212, 0.2);">
+                <i class="bi bi-file-earmark-bar-graph"></i>
+              </div>
+              <h3 class="fw-bold mb-0">Resume Analyzer</h3>
+            </div>
+            <p class="text-muted mb-4 fs-6">
+              Instantly analyze your CV/Resume PDF against industry standard roles. Extract key tech skills, identify
+              gaps, and evaluate your placement readiness score based on real job parameters.
+            </p>
+          </div>
+          <div>
+            <a href="/resume" class="btn-premium btn-premium-cyan w-100 py-3">
+              <span>Analyze Resume</span>
+              <i class="bi bi-shield-check"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-custom mt-5">
+    <div class="container text-center">
+      <p class="mb-0 small text-muted">&copy; 2026 AI Career Guide. All rights reserved. Powered by Flask & Antigravity.
+      </p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
